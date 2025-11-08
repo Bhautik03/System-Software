@@ -14,15 +14,9 @@ Date: 28 Sept, 2025.
 void print_limit(int resource, const char *name) {
     struct rlimit limit;
     
-    if (getrlimit(resource, &limit) == -1) {
-        perror("getrlimit");
-        return;
-    }
+    getrlimit(resource, &limit);
     
-    printf("%s: soft = %ld, hard = %ld\n",
-           name,
-           (limit.rlim_cur == RLIM_INFINITY) ? -1 : (long)limit.rlim_cur,
-           (limit.rlim_max == RLIM_INFINITY) ? -1 : (long)limit.rlim_max);
+    printf("%s: soft = %ld, hard = %ld\n", name, (limit.rlim_cur == RLIM_INFINITY) ? -1 : (long)limit.rlim_cur, (limit.rlim_max == RLIM_INFINITY) ? -1 : (long)limit.rlim_max);
 }
 
 int main() {
